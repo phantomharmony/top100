@@ -22,12 +22,26 @@ services:
       DB_PATH: /data/smart_order.db
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       TZ: Asia/Almaty
-    ports:
-      - "8501:8501"
+    expose:
+      - "8501"
     volumes:
       - smart_order_data:/data
     depends_on:
       - smart-order-bot
+
+  smart-order-nginx:
+    image: nginx:1.27-alpine
+    container_name: smart-order-nginx
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN}
+      TZ: Asia/Almaty
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
+    depends_on:
+      - smart-order-admin
 
 volumes:
   smart_order_data:

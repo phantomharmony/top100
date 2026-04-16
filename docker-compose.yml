@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  smart-order-bot:
+    build: .
+    container_name: smart-order-bot
+    restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      DB_PATH: /data/smart_order.db
+      TZ: Asia/Almaty
+    volumes:
+      - smart_order_data:/data
+
+  smart-order-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: smart-order-admin
+    restart: unless-stopped
+    environment:
+      DB_PATH: /data/smart_order.db
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      TZ: Asia/Almaty
+    ports:
+      - "8501:8501"
+    volumes:
+      - smart_order_data:/data
+    depends_on:
+      - smart-order-bot
+
+volumes:
+  smart_order_data:

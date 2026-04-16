@@ -6,10 +6,12 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 
 - Citizen sends a problem photo
 - Citizen shares GPS location
+- Citizen can switch language: EN / RU / KZ using `/language`
 - Bot stores report in SQLite
 - Bot returns a unique Ticket ID
 - Placeholder hook for admin notification
-- Streamlit admin panel with login, filters, metrics, CSV export, and status updates
+- Streamlit admin panel with login, filters, metrics, CSV export, status updates
+- Admin panel shows incident photo preview and geolocation map
 
 ## Quick Start
 

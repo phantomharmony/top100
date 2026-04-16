@@ -21,6 +21,7 @@ services:
     environment:
       DB_PATH: /data/smart_order.db
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      BOT_TOKEN: ${BOT_TOKEN}
       TZ: Asia/Almaty
     expose:
       - "8501"

@@ -39,10 +39,28 @@ services:
       TZ: Asia/Almaty
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - certbot_webroot:/var/www/certbot
+      - letsencrypt_data:/etc/letsencrypt:ro
     depends_on:
       - smart-order-admin
 
+  smart-order-certbot:
+    image: certbot/certbot:latest
+    container_name: smart-order-certbot
+    restart: unless-stopped
+    volumes:
+      - certbot_webroot:/var/www/certbot
+      - letsencrypt_data:/etc/letsencrypt
+    entrypoint: >
+      /bin/sh -c "trap exit TERM; while :; do
+      certbot renew --webroot -w /var/www/certbot --quiet;
+      sleep 12h & wait $${!};
+      done"
+
 volumes:
   smart_order_data:
+  certbot_webroot:
+  letsencrypt_data:

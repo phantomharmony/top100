@@ -34,8 +34,27 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 
 ### Optional HTTPS (recommended)
 
-- Keep this setup for now to verify domain routing.
-- Then issue a TLS certificate (Let's Encrypt) and add 443 SSL config in Nginx.
+- HTTPS is prepared with `certbot` service and shared certificate volumes.
+
+#### Steps to enable HTTPS
+
+1. Ensure DNS is ready:
+   - `DOMAIN` points to your droplet IP.
+2. Set email in `.env`:
+   - `LETSENCRYPT_EMAIL=you@your-domain`
+3. Start stack on HTTP first:
+   - `docker compose up -d --build`
+4. Issue certificate (one-time):
+   - `docker compose run --rm smart-order-certbot certonly --webroot -w /var/www/certbot -d $DOMAIN --email $LETSENCRYPT_EMAIL --agree-tos --no-eff-email`
+5. Enable SSL config:
+   - In `docker-compose.yml`, replace mounted template
+     `./nginx/default.conf.template` -> `./nginx/default-ssl.conf.template`
+6. Restart Nginx:
+   - `docker compose up -d smart-order-nginx`
+7. Open:
+   - `https://YOUR_DOMAIN`
+
+`smart-order-certbot` auto-renews certificates every 12 hours.
 
 
 ## Project Structure

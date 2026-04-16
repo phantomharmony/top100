@@ -8,8 +8,12 @@ server {
         root /var/www/certbot;
     }
 
-    location / {
-        proxy_pass http://smart-order-admin:8501;
+    location = /admin {
+        return 301 /admin/;
+    }
+
+    location /admin/ {
+        proxy_pass http://smart-order-admin:8501/admin/;
         proxy_http_version 1.1;
 
         proxy_set_header Host $host;
@@ -20,5 +24,10 @@ server {
         # Streamlit/WebSocket support
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
+    }
+
+    location / {
+        root /usr/share/nginx/html;
+        try_files $uri /index.html;
     }
 }

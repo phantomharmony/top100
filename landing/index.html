@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart-Order — Таза Қазақстан</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #121a33;
+        --text: #eaf0ff;
+        --muted: #9db0df;
+        --accent: #45d483;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, Segoe UI, Arial, sans-serif;
+        background: radial-gradient(1200px 600px at 20% -10%, #1b2a57 0%, var(--bg) 55%);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 56px 20px;
+      }
+      .card {
+        background: linear-gradient(180deg, #16244a 0%, var(--card) 100%);
+        border: 1px solid #2a3e75;
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 38px;
+      }
+      p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 18px 0 24px;
+      }
+      .badge {
+        background: #1b2b59;
+        border: 1px solid #324b8e;
+        color: #d5e2ff;
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 14px;
+      }
+      .cta {
+        display: inline-block;
+        text-decoration: none;
+        background: var(--accent);
+        color: #062012;
+        font-weight: 700;
+        padding: 12px 18px;
+        border-radius: 12px;
+      }
+      .footer {
+        margin-top: 16px;
+        color: #8da0cf;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card">
+        <h1>Smart-Order</h1>
+        <p>
+          Гражданская цифровая платформа для поддержки инициатив
+          <strong>«Таза Қазақстан»</strong>, <strong>«Адал Азамат»</strong> и
+          принципов <strong>Law &amp; Order</strong>.
+        </p>
+        <p>
+          Пользователи отправляют фото проблемы и геолокацию через Telegram-бота,
+          а администрация оперативно обрабатывает обращения через веб-панель.
+        </p>
+
+        <div class="badges">
+          <span class="badge">Telegram Bot</span>
+          <span class="badge">Python + aiogram</span>
+          <span class="badge">SQLite</span>
+          <span class="badge">Streamlit Admin</span>
+          <span class="badge">Nginx + Docker</span>
+        </div>
+
+        <a class="cta" href="/admin/">Открыть панель администратора</a>
+        <div class="footer">ENU Higher College • Top 100 College Projects of Kazakhstan</div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -126,7 +126,7 @@ def maps_link(lat: float, lon: float) -> str:
 
 def require_login() -> None:
     if not ADMIN_PASSWORD:
-        st.error("ADMIN_PASSWORD is not configured. Set it in environment variables.")
+        st.error("ADMIN_PASSWORD не настроен. Укажите его в переменных окружения.")
         st.stop()
 
     if "admin_auth" not in st.session_state:
@@ -135,50 +135,50 @@ def require_login() -> None:
     if st.session_state.admin_auth:
         return
 
-    st.subheader("Admin Login")
-    password = st.text_input("Password", type="password")
-    if st.button("Login", type="primary"):
+    st.subheader("Вход для администратора")
+    password = st.text_input("Пароль", type="password")
+    if st.button("Войти", type="primary"):
         if password == ADMIN_PASSWORD:
             st.session_state.admin_auth = True
             st.rerun()
         else:
-            st.error("Invalid password")
+            st.error("Неверный пароль")
     st.stop()
 
 
 def main() -> None:
-    st.set_page_config(page_title="Smart-Order Admin", page_icon="🛡️", layout="wide")
-    st.title("🛡️ Smart-Order Admin Dashboard")
-    st.caption("Monitoring incidents for Taza Qazaqstan civic reporting")
+    st.set_page_config(page_title="Smart-Order Админ", page_icon="🛡️", layout="wide")
+    st.title("🛡️ Smart-Order: Панель администратора")
+    st.caption("Мониторинг обращений в рамках инициативы Taza Qazaqstan")
 
     require_login()
 
     counts = fetch_counts()
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total", counts["total"])
-    c2.metric("New", counts["new"])
-    c3.metric("In Progress", counts["in_progress"])
-    c4.metric("Resolved", counts["resolved"])
+    c1.metric("Всего", counts["total"])
+    c2.metric("Новые", counts["new"])
+    c3.metric("В работе", counts["in_progress"])
+    c4.metric("Решено", counts["resolved"])
 
     st.divider()
 
     left, right = st.columns([2, 1])
     with left:
         status_filter = st.selectbox(
-            "Filter by status",
+            "Фильтр по статусу",
             options=["all", *STATUS_OPTIONS],
             index=0,
         )
     with right:
-        refresh = st.button("Refresh")
+        refresh = st.button("Обновить")
         if refresh:
             st.rerun()
 
     incidents = fetch_incidents(status_filter)
-    st.subheader("Incidents")
+    st.subheader("Обращения")
 
     if incidents.empty:
-        st.info("No incidents found.")
+        st.info("Обращения не найдены.")
     else:
         incidents["map_url"] = incidents.apply(
             lambda row: maps_link(float(row["lat"]), float(row["lon"])),
@@ -187,42 +187,42 @@ def main() -> None:
         st.dataframe(incidents, use_container_width=True, hide_index=True)
         csv_data = incidents.to_csv(index=False).encode("utf-8")
         st.download_button(
-            "Download CSV",
+            "Скачать CSV",
             data=csv_data,
             file_name="smart_order_incidents.csv",
             mime="text/csv",
         )
 
         st.divider()
-        st.subheader("Incident media & geolocation")
-        view_id = st.selectbox("Select incident", options=incidents["id"].astype(int).tolist())
+        st.subheader("Фото и геолокация")
+        view_id = st.selectbox("Выберите обращение", options=incidents["id"].astype(int).tolist())
         selected = incidents[incidents["id"] == view_id].iloc[0]
 
         left_view, right_view = st.columns(2)
         with left_view:
-            st.markdown(f"**Ticket:** {selected['ticket_id']}")
+            st.markdown(f"**Тикет:** {selected['ticket_id']}")
             photo_url = resolve_telegram_photo_url(str(selected["photo_id"]))
             if photo_url:
-                st.image(photo_url, caption=f"Incident {view_id} photo", use_container_width=True)
+                st.image(photo_url, caption=f"Фото обращения {view_id}", use_container_width=True)
             else:
-                st.warning("Photo preview unavailable. Check BOT_TOKEN in admin service.")
+                st.warning("Превью фото недоступно. Проверьте BOT_TOKEN в сервисе администратора.")
                 st.code(str(selected["photo_id"]))
 
         with right_view:
             lat = float(selected["lat"])
             lon = float(selected["lon"])
-            st.markdown(f"**Coordinates:** {lat:.6f}, {lon:.6f}")
+            st.markdown(f"**Координаты:** {lat:.6f}, {lon:.6f}")
             st.map(pd.DataFrame([{"lat": lat, "lon": lon}]), use_container_width=True)
-            st.markdown(f"[Open in Google Maps]({maps_link(lat, lon)})")
+            st.markdown(f"[Открыть в Google Maps]({maps_link(lat, lon)})")
 
         st.divider()
-        st.subheader("Update Incident Status")
+        st.subheader("Обновление статуса")
         id_options = incidents["id"].astype(int).tolist()
-        selected_id = st.selectbox("Incident ID", options=id_options)
-        selected_status = st.selectbox("New status", options=STATUS_OPTIONS)
-        if st.button("Apply status update", type="primary"):
+        selected_id = st.selectbox("ID обращения", options=id_options)
+        selected_status = st.selectbox("Новый статус", options=STATUS_OPTIONS)
+        if st.button("Применить", type="primary"):
             update_status(int(selected_id), selected_status)
-            st.success(f"Incident {selected_id} updated to '{selected_status}'.")
+            st.success(f"Обращение {selected_id} обновлено: '{selected_status}'.")
             st.rerun()
 
 

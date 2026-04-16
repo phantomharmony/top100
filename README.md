@@ -10,8 +10,9 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 - Bot stores report in SQLite
 - Bot returns a unique Ticket ID
 - Placeholder hook for admin notification
-- Streamlit admin panel with login, filters, metrics, CSV export, status updates
+- Streamlit admin panel (Russian UI) with login, filters, metrics, CSV export, status updates
 - Admin panel shows incident photo preview and geolocation map
+- Landing page on main domain (`/`) and admin panel at `/admin/`
 
 ## Quick Start
 
@@ -24,12 +25,13 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 4. Run:
    - `docker compose up --build -d`
 5. Open admin panel via domain:
-   - `http://YOUR_DOMAIN`
+   - Landing page: `http://YOUR_DOMAIN/`
+   - Admin panel: `http://YOUR_DOMAIN/admin/`
 
 ## Nginx Reverse Proxy
 
 - Nginx runs as `smart-order-nginx` in Docker Compose.
-- It routes domain traffic on port 80 to the internal Streamlit admin service.
+- It serves the landing page on `/` and routes `/admin/` to the internal Streamlit service.
 - Admin app is no longer published directly to host port 8501.
 
 ### Optional HTTPS (recommended)

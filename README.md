@@ -68,3 +68,4 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 - `docker-compose.yml` — deployment stack
 - `nginx/default.conf.template` — Nginx domain reverse-proxy config
 - `ARCHITECTURE.md` — system layout for presentation
+log:pass

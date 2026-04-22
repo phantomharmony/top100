@@ -1,0 +1,370 @@
+:root {
+  --bg: #0b1020;
+  --panel: #11182e;
+  --card: #121b36;
+  --text: #e7ecff;
+  --muted: #9aa6ce;
+  --primary: #5b8cff;
+  --primary-2: #3be3c3;
+  --wall: #202a4f;
+  --path: #101833;
+  --door: #ffb84d;
+  --door-open: #46d37b;
+  --player: #ff4d88;
+  --finish: #7b6bff;
+  --danger: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 800px at 90% -20%, rgba(91, 140, 255, 0.25), transparent 60%),
+    radial-gradient(1000px 700px at -20% 100%, rgba(59, 227, 195, 0.15), transparent 60%),
+    var(--bg);
+}
+
+.app-shell {
+  width: min(1200px, 100% - 2rem);
+  margin: 1rem auto 2rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.topbar p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  gap: 1rem;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+.hud ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.hud li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  padding-bottom: 0.3rem;
+}
+
+.hud span {
+  color: var(--muted);
+}
+
+.hint {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+kbd {
+  background: #1c2548;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 0.1rem 0.35rem;
+  margin-inline: 0.15rem;
+  font-size: 0.8rem;
+}
+
+.maze-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.maze {
+  --size: 64px;
+  display: grid;
+  grid-template-columns: repeat(7, var(--size));
+  grid-template-rows: repeat(7, var(--size));
+  gap: 6px;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+
+.cell {
+  border-radius: 12px;
+  background: var(--path);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  display: grid;
+  place-items: center;
+  transition: 0.2s ease;
+}
+
+.cell.wall {
+  background: var(--wall);
+}
+
+.cell.door::after {
+  content: "🚪";
+  font-size: 1.25rem;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35));
+}
+
+.cell.door.open {
+  background: color-mix(in srgb, var(--door-open) 30%, var(--path));
+}
+
+.cell.door.open::after {
+  content: "✅";
+}
+
+.cell.start::before {
+  content: "S";
+  color: #c6ffe0;
+  opacity: 0.7;
+  font-weight: 700;
+}
+
+.cell.finish {
+  background: color-mix(in srgb, var(--finish) 35%, var(--path));
+}
+
+.cell.finish::before {
+  content: "🏁";
+  font-size: 1.2rem;
+}
+
+.player {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffd1e0 0 25%, var(--player) 55%);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.2), 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 12px;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  background: linear-gradient(120deg, var(--primary), #7ba3ff);
+  color: white;
+  cursor: pointer;
+}
+
+a.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.btn.secondary {
+  background: #25305d;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 20, 0.75);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 20;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.modal-card {
+  width: min(560px, 100%);
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.modal-card.success {
+  text-align: center;
+}
+
+.label {
+  display: inline-block;
+  margin: 0.25rem 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.text-input {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: #1b2753;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
+.text-input:focus {
+  outline: 2px solid rgba(91, 140, 255, 0.5);
+  outline-offset: 1px;
+}
+
+.answers {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.answer {
+  text-align: left;
+  background: #1b2753;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.feedback {
+  min-height: 1.2rem;
+  font-weight: 600;
+}
+
+.feedback.bad {
+  color: var(--danger);
+}
+
+.feedback.good {
+  color: #62e79f;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.about p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.leaderboard {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.leaderboard li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  padding-bottom: 0.35rem;
+  font-size: 0.92rem;
+}
+
+.leaderboard .you {
+  color: #7df3bf;
+  font-weight: 700;
+}
+
+.mobile-controls {
+  margin-top: 1rem;
+}
+
+.touchpad {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  margin-bottom: 0.75rem;
+  border: 1px dashed rgba(255,255,255,0.25);
+  border-radius: 14px;
+  min-height: 90px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.02);
+}
+
+.dpad {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.dpad-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dpad-btn {
+  width: 64px;
+  height: 52px;
+  font-size: 1.1rem;
+  touch-action: manipulation;
+}
+
+@media (max-width: 1100px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .maze {
+    --size: min(13vw, 58px);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mobile-controls {
+    display: none;
+  }
+}

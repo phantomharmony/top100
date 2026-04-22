@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENU RoboQuest — Админ-экран</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="app-shell admin-shell">
+    <header class="topbar">
+      <div>
+        <h1>ENU RoboQuest — Админ-статистика</h1>
+        <p>Экран для проектора: прогресс, активность и рейтинг</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="btn secondary" href="presentation.html">Презентация</a>
+        <a class="btn secondary" href="index.html">К игре</a>
+      </div>
+    </header>
+
+    <main class="admin-grid">
+      <section class="card stat-card">
+        <h2>Игроки</h2>
+        <div id="statPlayers" class="stat-value">0</div>
+        <p class="muted">Уникальных участников</p>
+      </section>
+
+      <section class="card stat-card">
+        <h2>Активны сейчас</h2>
+        <div id="statOnline" class="stat-value">0</div>
+        <p class="muted">Игроки за 15 минут</p>
+      </section>
+
+      <section class="card stat-card">
+        <h2>Всего попыток</h2>
+        <div id="statRuns" class="stat-value">0</div>
+        <p class="muted">Все финиши</p>
+      </section>
+
+      <section class="card stat-card">
+        <h2>Средний балл</h2>
+        <div id="statAvgScore" class="stat-value">0</div>
+        <p class="muted">По всем попыткам</p>
+      </section>
+
+      <section class="card stat-card">
+        <h2>Среднее время</h2>
+        <div id="statAvgTime" class="stat-value">00:00</div>
+        <p class="muted">До финиша</p>
+      </section>
+
+      <section class="card doors-card">
+        <h2>Открытые двери за попытку</h2>
+        <div id="doorsBars" class="bars"></div>
+      </section>
+
+      <section class="card live-maze-card">
+        <h2>Лабиринт в реальном времени</h2>
+        <p class="muted">Точки показывают, где сейчас находятся активные игроки.</p>
+        <div id="liveMaze" class="live-maze"></div>
+      </section>
+
+      <section class="card live-list-card">
+        <h2>Кто где находится</h2>
+        <ul id="livePlayersList" class="recent-list"></ul>
+      </section>
+
+      <section class="card board-card">
+        <h2>Топ игроков</h2>
+        <ol id="adminLeaderboard" class="leaderboard board"></ol>
+      </section>
+
+      <section class="card recent-card">
+        <h2>Последние финиши</h2>
+        <ul id="recentRuns" class="recent-list"></ul>
+      </section>
+    </main>
+
+    <p id="adminStatus" class="muted admin-status">Загрузка...</p>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

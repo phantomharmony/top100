@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENU RoboQuest — Квест-игра по робототехнике</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>ENU RoboQuest</h1>
+        <p>Лабиринт знаний по робототехнике для школьников</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="btn secondary" href="presentation.html">Презентация</a>
+        <a class="btn secondary" href="admin.html" target="_blank" rel="noopener">Админ-экран</a>
+        <button id="restartBtn" class="btn secondary">Начать заново</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="hud card">
+        <h2>Панель игры</h2>
+        <ul>
+          <li><span>Игрок:</span> <strong id="playerName">—</strong></li>
+          <li><span>Колледж:</span> <strong>ЕНУ</strong></li>
+          <li><span>Открыто дверей:</span> <strong id="doorsOpen">0/5</strong></li>
+          <li><span>Решено вопросов:</span> <strong id="questionsDone">0/10</strong></li>
+          <li><span>Баллы:</span> <strong id="score">0</strong></li>
+          <li><span>Время:</span> <strong id="timer">00:00</strong></li>
+        </ul>
+        <div class="hint">
+          Управление: клавиши <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> или WASD.
+          Чтобы пройти через дверь, ответьте правильно на 2 вопроса.
+        </div>
+      </section>
+
+      <section class="maze-wrap card">
+        <h2>Лабиринт</h2>
+        <div id="maze" class="maze" aria-label="Игровое поле"></div>
+      </section>
+
+      <section class="mobile-controls card">
+        <h2>Управление с телефона</h2>
+        <p class="muted">Свайпайте по зоне ниже или используйте кнопки.</p>
+        <div id="touchpad" class="touchpad" aria-label="Свайп-зона управления">
+          Свайп: вверх / вниз / влево / вправо
+        </div>
+        <div class="dpad" aria-label="Сенсорное управление">
+          <button class="btn secondary dpad-btn" data-move="up">↑</button>
+          <div class="dpad-row">
+            <button class="btn secondary dpad-btn" data-move="left">←</button>
+            <button class="btn secondary dpad-btn" data-move="down">↓</button>
+            <button class="btn secondary dpad-btn" data-move="right">→</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="about card">
+        <h2>Лидерборд</h2>
+        <p class="muted">Рейтинг обновляется автоматически для всех подключённых телефонов.</p>
+        <ol id="leaderboard" class="leaderboard"></ol>
+        <p id="leaderboardStatus" class="muted"></p>
+      </section>
+    </main>
+  </div>
+
+  <div id="playerModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="playerTitle">
+    <div class="modal-card">
+      <h3 id="playerTitle">Подключение к ENU RoboQuest</h3>
+      <p>Введите имя (или команду), чтобы попасть в общий рейтинг.</p>
+      <label for="playerInput" class="label">Имя игрока</label>
+      <input id="playerInput" class="text-input" maxlength="24" placeholder="Например: 9А Айдар" />
+      <p id="playerError" class="feedback bad"></p>
+      <div class="modal-actions">
+        <button id="savePlayer" class="btn">Начать игру</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="questionModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="questionTitle">
+    <div class="modal-card">
+      <h3 id="questionTitle">Вопрос</h3>
+      <p id="questionText"></p>
+      <div id="answers" class="answers"></div>
+      <p id="questionFeedback" class="feedback"></p>
+      <div class="modal-actions">
+        <button id="closeModal" class="btn secondary">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="finishModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="finishTitle">
+    <div class="modal-card success">
+      <h3 id="finishTitle">Отлично! Квест пройден 🎉</h3>
+      <p id="finishText"></p>
+      <div class="modal-actions">
+        <button id="playAgain" class="btn">Сыграть ещё раз</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

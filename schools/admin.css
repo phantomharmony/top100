@@ -1,0 +1,202 @@
+.admin-shell {
+  width: min(1400px, 100% - 2rem);
+}
+
+.admin-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+}
+
+.stat-card {
+  min-height: 150px;
+}
+
+.stat-value {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
+.doors-card {
+  grid-column: span 2;
+}
+
+.live-maze-card {
+  grid-column: span 2;
+}
+
+.live-list-card {
+  grid-column: span 1;
+}
+
+.board-card {
+  grid-column: span 2;
+}
+
+.recent-card {
+  grid-column: span 3;
+}
+
+.bars {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 70px;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5b8cff, #3be3c3);
+}
+
+.board {
+  max-height: 420px;
+  overflow: auto;
+}
+
+.live-maze {
+  --size: 52px;
+  display: grid;
+  grid-template-columns: repeat(7, var(--size));
+  grid-template-rows: repeat(7, var(--size));
+  gap: 6px;
+  justify-content: start;
+  margin-top: 0.6rem;
+}
+
+.live-cell {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #101833;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.live-cell.wall {
+  background: #202a4f;
+}
+
+.live-cell.start::before {
+  content: "S";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  opacity: 0.45;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.live-cell.finish::before {
+  content: "🏁";
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: 0.82rem;
+}
+
+.live-cell.door::before {
+  content: "🚪";
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.player-dot-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  padding: 2px;
+}
+
+.player-dot {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  line-height: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d88, #7b6bff);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+.recent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 420px;
+  overflow: auto;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.recent-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  padding-bottom: 0.35rem;
+  font-size: 0.92rem;
+}
+
+.admin-status {
+  margin: 1rem 0 0;
+}
+
+@media (max-width: 1200px) {
+  .admin-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  .doors-card,
+  .live-maze-card,
+  .board-card,
+  .recent-card {
+    grid-column: span 2;
+  }
+
+  .live-list-card {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doors-card,
+  .live-maze-card,
+  .live-list-card,
+  .board-card,
+  .recent-card {
+    grid-column: span 1;
+  }
+
+  .live-maze {
+    --size: min(13vw, 48px);
+  }
+}

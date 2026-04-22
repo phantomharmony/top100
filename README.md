@@ -13,6 +13,7 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 - Streamlit admin panel (Russian UI) with login, filters, metrics, CSV export, status updates
 - Admin panel shows incident photo preview and geolocation map
 - Landing page on main domain (`/`) and admin panel at `/admin/`
+- ENU RoboQuest schools module available at `/schools/`
 
 ## Quick Start
 
@@ -27,11 +28,13 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 5. Open admin panel via domain:
    - Landing page: `http://YOUR_DOMAIN/`
    - Admin panel: `http://YOUR_DOMAIN/admin/`
+   - Schools RoboQuest: `http://YOUR_DOMAIN/schools/`
 
 ## Nginx Reverse Proxy
 
 - Nginx runs as `smart-order-nginx` in Docker Compose.
 - It serves the landing page on `/` and routes `/admin/` to the internal Streamlit service.
+- It routes `/schools/` to the internal RoboQuest Node.js service.
 - Admin app is no longer published directly to host port 8501.
 
 ### Optional HTTPS (recommended)
@@ -68,4 +71,5 @@ Smart-Order is a Telegram-based civic reporting system inspired by **Taza Qazaqs
 - `docker-compose.yml` — deployment stack
 - `nginx/default.conf.template` — Nginx domain reverse-proxy config
 - `ARCHITECTURE.md` — system layout for presentation
+- `schools/` — ENU RoboQuest multiplayer module (Node.js + Express)
 log:pass

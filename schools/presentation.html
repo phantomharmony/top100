@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Презентация — Колледж ЕНУ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="presentation.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>Колледж ЕНУ — презентация</h1>
+        <p>Локация: ул. Есенберлина, 25 • Подготовка школьников к RoboQuest</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="btn secondary" href="index.html">К игре</a>
+        <a class="btn secondary" href="admin.html">Админ-экран</a>
+      </div>
+    </header>
+
+    <main class="presentation-grid">
+      <section class="card hero">
+        <h2>Почему ENU RoboQuest</h2>
+        <p>
+          Интерактивный формат помогает школьникам быстро включиться в инженерное мышление:
+          логика, алгоритмы, работа с датчиками и безопасная сборка робота.
+        </p>
+        <ul>
+          <li>Практика + игра = высокая вовлечённость</li>
+          <li>Командная работа и быстрые решения</li>
+          <li>Понятный вход в электронику и программирование</li>
+        </ul>
+      </section>
+
+      <section class="card info">
+        <h2>О колледже</h2>
+        <ul class="facts">
+          <li><strong>Площадка:</strong> ENU College</li>
+          <li><strong>Адрес:</strong> Есенберлина, 25</li>
+          <li><strong>Формат:</strong> мастер-классы, квесты, профориентация</li>
+          <li><strong>Цель:</strong> показать школьникам современную робототехнику</li>
+        </ul>
+      </section>
+
+      <section class="card theory">
+        <h2>Краткая теория по вопросам квеста</h2>
+
+        <div class="topic">
+          <h3>1) Датчики</h3>
+          <p>Ультразвуковой и ИК-датчики измеряют расстояние, датчик линии/цвета помогает роботу держать траекторию.</p>
+        </div>
+
+        <div class="topic">
+          <h3>2) Исполнители</h3>
+          <p>DC-моторы отвечают за движение, сервопривод — за точный угол, драйвер (H-мост) задаёт направление и мощность.</p>
+        </div>
+
+        <div class="topic">
+          <h3>3) Алгоритмы</h3>
+          <p>Алгоритм — последовательность шагов. Условие `if` выбирает действие, цикл `for`/`while` повторяет блок команд.</p>
+        </div>
+
+        <div class="topic">
+          <h3>4) Управление движением</h3>
+          <p>PWM (ШИМ) регулирует скорость моторов. ПИД-регулятор уменьшает ошибку и стабилизирует движение по линии.</p>
+        </div>
+
+        <div class="topic">
+          <h3>5) Связь и протоколы</h3>
+          <p>I2C — две линии (SDA/SCL) для датчиков, UART — простой обмен данными по последовательному порту.</p>
+        </div>
+
+        <div class="topic">
+          <h3>6) Питание и безопасность</h3>
+          <p>Перед включением проверяют соединения. Для 5V логики используют корректное питание/преобразователь, не работают с мокрыми руками.</p>
+        </div>
+
+        <div class="topic">
+          <h3>7) Отладка</h3>
+          <p>Сначала проверяют механику и питание, затем датчики, потом код. FSM (конечный автомат) удобно описывает состояния робота.</p>
+        </div>
+      </section>
+
+      <section class="card questions">
+        <h2>Примеры вопросов для тренировки (10)</h2>
+        <ol class="questions-list">
+          <li>
+            Какой элемент робота обычно измеряет расстояние до объекта?
+            <span class="answer">Ответ: ультразвуковой датчик.</span>
+          </li>
+          <li>
+            Что такое алгоритм в робототехнике?
+            <span class="answer">Ответ: план действий для выполнения задачи.</span>
+          </li>
+          <li>
+            Для чего нужен сервопривод?
+            <span class="answer">Ответ: для точного управления углом поворота.</span>
+          </li>
+          <li>
+            Что такое PWM (ШИМ)?
+            <span class="answer">Ответ: метод управления мощностью через импульсы.</span>
+          </li>
+          <li>
+            Какой протокол подключает несколько датчиков по линиям SDA/SCL?
+            <span class="answer">Ответ: I2C.</span>
+          </li>
+          <li>
+            Что делает H-мост в драйвере двигателя?
+            <span class="answer">Ответ: меняет направление вращения и управляет мотором.</span>
+          </li>
+          <li>
+            Для чего в ПИД-регуляторе нужен коэффициент D?
+            <span class="answer">Ответ: уменьшает колебания и перерегулирование.</span>
+          </li>
+          <li>
+            Что означает baud rate в UART?
+            <span class="answer">Ответ: скорость передачи данных в линии связи.</span>
+          </li>
+          <li>
+            Какой тип памяти Arduino хранит данные после отключения питания?
+            <span class="answer">Ответ: EEPROM.</span>
+          </li>
+          <li>
+            Что важно сделать перед сменой проводки робота?
+            <span class="answer">Ответ: отключить питание.</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="card plan">
+        <h2>План занятия (30–40 мин)</h2>
+        <ol>
+          <li>Вступление о колледже (5 мин)</li>
+          <li>Краткая теория (8–10 мин)</li>
+          <li>Квест RoboQuest на телефонах (15–20 мин)</li>
+          <li>Разбор результатов по лидерборду (5 мин)</li>
+        </ol>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
